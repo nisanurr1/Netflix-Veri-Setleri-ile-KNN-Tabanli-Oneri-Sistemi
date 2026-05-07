@@ -27,7 +27,7 @@ film_df[metinsel_sutunlar] = film_df[metinsel_sutunlar].fillna("")
 dizi_df[metinsel_sutunlar] = dizi_df[metinsel_sutunlar].fillna("")
 
 # Veri setlerinin güncel boyutlarını görmek için;
-print("Film Veri Seti Temizlenmiş Yeni Boyutu:")
-print(film_df.shape)
-print("Dizi Veri Seti Temizlenmiş Yeni Boyutu:")
-print(dizi_df.shape)
+# print("Film Veri Seti Temizlenmiş Yeni Boyutu:")
+# print(film_df.shape)
+# print("Dizi Veri Seti Temizlenmiş Yeni Boyutu:")
+# print(dizi_df.shape)

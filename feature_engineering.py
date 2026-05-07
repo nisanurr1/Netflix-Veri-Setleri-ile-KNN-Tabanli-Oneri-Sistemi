@@ -28,11 +28,12 @@ dizi_df["icerik"] = (
     dizi_df["language"]
 )
 
-print("Film içerik örneği:")
-print(film_df[["title", "icerik"]].head())
+# kontroller içindi
+# print("Film içerik örneği:")
+# print(film_df[["title", "icerik"]].head())
 
-print("\nDizi içerik örneği:")
-print(dizi_df[["title", "icerik"]].head())
+# print("\nDizi içerik örneği:")
+# print(dizi_df[["title", "icerik"]].head())
 
 # Sırada elde ettiğimiz içerikteki metinleri sayısallaştırmak için vektörleştirme işlemi var.
 # Bunun için TfidfVectorizer kullanarak içerik sütununu sayısal vektörlere dönüştüreceğim.
@@ -61,8 +62,8 @@ film_vektorleri = film_tfidf.fit_transform(film_df["icerik"])
 dizi_vektorleri = dizi_tfidf.fit_transform(dizi_df["icerik"])
 # fit_transform() metodu, önce verilen metin verisinden bir kelime dağarcığı oluşturur (fit) ve ardından her metni bu kelime dağarcığına göre sayısal vektörlere dönüştürür (transform).
 
-print("Film vektör boyutu:")
-print(film_vektorleri.shape)
+# print("Film vektör boyutu:")
+# print(film_vektorleri.shape)
 
-print("\nDizi vektör boyutu:")
-print(dizi_vektorleri.shape)
+# print("\nDizi vektör boyutu:")
+# print(dizi_vektorleri.shape)
