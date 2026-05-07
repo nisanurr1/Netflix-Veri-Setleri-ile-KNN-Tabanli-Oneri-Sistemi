@@ -1,4 +1,5 @@
- # .csv dosyalarımı okuyup pandas dataframe'lerine çevireceğim kısım 
+# .csv dosyalarımı okuyup pandas dataframe'lerine çevireceğim kısım 
+# Aynı zamanda veriler hakkında genel bir bilgi edinmek için head, info, columns ve isnull gibi fonksiyonları kullanarak veri setlerini inceleyeceğim bölüm.
 
 import pandas as pd
 
