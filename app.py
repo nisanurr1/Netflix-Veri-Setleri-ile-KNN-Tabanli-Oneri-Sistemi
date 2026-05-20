@@ -9,6 +9,7 @@ def ana_sayfa():
     aranan_icerik = ""
     secilen_tur = ""
 
+    # htmlden gelen verileri request objesi ile alıyoruz. Eğer kullanıcı formu gönderirse, aranan içeriği ve türü alarak öneri fonksiyonlarını çağırıyoruz.
     if request.method == "POST":
         aranan_icerik = request.form["icerik_adi"]
         secilen_tur = request.form["icerik_turu"]
@@ -18,6 +19,7 @@ def ana_sayfa():
         elif secilen_tur == "dizi":
             oneriler = dizi_oner(aranan_icerik)
 
+    # html dosyasını kullanıcıya göstermek için render_template fonksiyonunu kullanıyoruz.
     return render_template(
         "index.html",
         oneriler=oneriler,

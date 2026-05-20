@@ -8,12 +8,15 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 
 pd.set_option("display.max_colwidth", None) # içeriklerin devamını görebilmek için geçici olarak ekledim.
 
-# Film veri seti için içerik sütunu oluşturma
+# Film veri seti için önemli değişkenlerle içerik sütunu oluşturma
+# burada her film için ve aşağıda her dizi için tür, tanım, oyuncu kadrosu, yönetmen, ülke ve dil bilgilerini birleştirerek tek bir içerik sütunu oluşturuyorum.
+# içerik tabanlı olduğu için bu şekilde.
+
 film_df["icerik"] = (
-    film_df["genres"] + " " +
-    film_df["description"] + " " +
-    film_df["cast"] + " " +
-    film_df["director"] + " " +
+    film_df["genres"] + " " + # tür
+    film_df["description"] + " " + # tanım
+    film_df["cast"] + " " + # oyuncu kadrosu
+    film_df["director"] + " " + # yönetmen
     film_df["country"] + " " +
     film_df["language"]
 )
@@ -44,6 +47,8 @@ film_tfidf = TfidfVectorizer(
     min_df=2,
     max_df=0.8
 )
+# burada amacım her içerikte geçen kelimelerin önem ağrılıklarını hesaplamaktı.
+# bundan dolayı yaygın kelimlerin etkisini azaltmaya çalıştım.
 
 dizi_tfidf = TfidfVectorizer(
     stop_words="english",
@@ -53,14 +58,21 @@ dizi_tfidf = TfidfVectorizer(
 )
 # stop_words="english" parametresi, İngilizce'deki yaygın kullanılan kelimeleri (örneğin "the", "is", "and" gibi) vektörleştirme işleminden çıkarır. 
 # Bu, modelin daha anlamlı ve ayırt edici özelliklere odaklanmasına yardımcı olur.
-# max_features=10000 parametresi, vektörleştirme işleminde kullanılacak maksimum kelime sayısını sınırlar. Bu sayede normalde 65000 kadar kelime içeren içerik sütununu daha yönetilebilir bir boyuta indirgeriz.
+# max_features=10000 parametresi, vektörleştirme işleminde kullanılacak maksimum kelime sayısını sınırlar. 
+# Bu sayede normalde 65000 kadar kelime içeren içerik sütununu daha yönetilebilir bir boyuta indirgeriz.
 # Bunu yapmamış olsaydık maliyetli ve aşırı karmaşık bir modelle karşılaşabilirdik.
+
 # min_df=2 parametresi, vektörleştirme işleminde sadece en az 2 belgede geçen kelimeleri dikkate alır. Bu, nadir kelimelerin etkisini azaltarak modelin genelleme yeteneğini artırır.
 # max_df=0.8 parametresi, vektörleştirme işleminde belgelerin %80'inden fazla geçen kelimeleri almaz. Bu da çok yaygın kelimelerin etkisini azaltarak modelin daha anlamlı özelliklere odaklanmasını sağlar. 
 
+
+# burada içerikler kelime önem ağırlıklarını temsil eden matematiksel vektörler halinde ifade edilmiş oldu 
+# ve KNN algoritmasının benzerlik hesaplaması yapabileceği hale geldi.
+
 film_vektorleri = film_tfidf.fit_transform(film_df["icerik"])
 dizi_vektorleri = dizi_tfidf.fit_transform(dizi_df["icerik"])
-# fit_transform() metodu, önce verilen metin verisinden bir kelime dağarcığı oluşturur (fit) ve ardından her metni bu kelime dağarcığına göre sayısal vektörlere dönüştürür (transform).
+# fit_transform() metodu, önce verilen metin verisinden bir kelime dağarcığı oluşturur (fit) 
+# ve ardından her metni bu kelime dağarcığına göre sayısal vektörlere dönüştürür (transform).
 
 # print("Film vektör boyutu:")
 # print(film_vektorleri.shape)

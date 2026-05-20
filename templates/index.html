@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Netflix KNN Öneri Sistemi</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <div class="ana-kapsayici">
+        <h1>NETFLIX ÖNERİ SİSTEMİ</h1>
+        <p class="alt-yazi">KNN tabanlı hibrit film ve dizi öneri sistemi</p>
+
+        <form method="POST" class="arama-kutusu">
+            <input 
+                type="text" 
+                name="icerik_adi" 
+                placeholder="Örneğin: Inception veya Running Man"
+                required
+            >
+
+            <select name="icerik_turu">
+                <option value="film">Film</option>
+                <option value="dizi">Dizi</option>
+            </select>
+
+            <button type="submit">Önerileri Getir</button>
+        </form>
+
+        {% if oneriler is not none %}
+            <h2>"{{ aranan_icerik }}" için öneriler</h2>
+
+            {% if oneriler is string %}
+                <p class="hata">{{ oneriler }}</p>
+            {% else %}
+                <div class="kart-alani">
+                    {% for index, satir in oneriler.iterrows() %}
+                        <div class="kart">
+                            <h3>{{ satir["title"] }}</h3>
+                            <p><strong>Tür:</strong> {{ satir["genres"] }}</p>
+                            <p><strong>Oy Ortalaması:</strong> {{ "%.2f"|format(satir["vote_average"]) }}</p>
+                            <p><strong>Popülerlik:</strong> {{ "%.2f"|format(satir["popularity"]) }}</p>
+                            <p><strong>Hibrit Puan:</strong> {{ "%.3f"|format(satir["hibrit_puan"]) }}</p>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endif %}
+    </div>
+
+</body>
+</html>

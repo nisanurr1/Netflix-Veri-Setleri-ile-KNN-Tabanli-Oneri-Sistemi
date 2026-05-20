@@ -23,10 +23,13 @@ metinsel_sutunlar = [
 
 # Eksik metinsel verileri boş metin ile dolduruyoruz
 # Burada bunları silmek yerine boşlukla doldurma sebebim eksik veri etkisini azaltmak.
+# aynı zamanda tek bir eksik veri yüzünden o içeriğin tamamen göz ardı edilmesini istemiyorum.
+# ilgili filmin ya da dizinin bazı özellikleri önemli olabilir ve bu özellikler diğer içeriklerle benzerlik hesaplamasında etkili olabilir.
+
 film_df[metinsel_sutunlar] = film_df[metinsel_sutunlar].fillna("")
 dizi_df[metinsel_sutunlar] = dizi_df[metinsel_sutunlar].fillna("")
 
-# Veri setlerinin güncel boyutlarını görmek için;
+#Veri setlerinin güncel boyutlarını görmek için;
 # print("Film Veri Seti Temizlenmiş Yeni Boyutu:")
 # print(film_df.shape)
 # print("Dizi Veri Seti Temizlenmiş Yeni Boyutu:")
